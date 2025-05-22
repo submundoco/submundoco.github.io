@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submundo del Conocimiento - Comunidad Multidisciplinaria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Header y Navegación */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ecf0f1;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #8b5a3c, #d4af37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        nav a:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Sección Principal */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="books" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%23f8f9fa" opacity="0.1"/><rect x="10" y="20" width="15" height="60" fill="%23d4af37" opacity="0.3"/><rect x="30" y="15" width="12" height="65" fill="%238b5a3c" opacity="0.3"/><rect x="50" y="25" width="18" height="55" fill="%232c3e50" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23books)"/></svg>');
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #d4af37, #8b5a3c);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Secciones de contenido */
+        .content-section {
+            padding: 4rem 0;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a1a2e;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #d4af37, #8b5a3c);
+            margin: 1rem auto;
+        }
+
+        /* Tarjetas de contenido */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #d4af37;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #d4af37, #8b5a3c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Estilos específicos para cada sección */
+        .mission-text {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            color: #34495e;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">S</div>
+                    <h1>Submundo del Conocimiento</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+                        <li><a href="#" onclick="showSection('sobre-nosotros')">Sobre Nosotros</a></li>
+                        <li><a href="#" onclick="showSection('comunidad')">Comunidad</a></li>
+                        <li><a href="#" onclick="showSection('proyectos')">Proyectos</a></li>
+                        <li><a href="#" onclick="showSection('blog')">Blog</a></li>
+                        <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="content-section active">
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Bienvenido al Submundo del Conocimiento</h2>
+                    <p>Una comunidad multidisciplinaria que integra ciencia, arte, filosofía, historia y literatura para fomentar el pensamiento crítico y el aprendizaje colectivo.</p>
+                    <a href="#" class="cta-button" onclick="showSection('comunidad')">Únete a Nuestra Comunidad</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Disciplinas Integradas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Conocimiento Libre</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1+</div>
+                    <div class="stat-label">Comunidad Creciente</div>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Ciencia</h3>
+                    <p>Exploración rigurosa del mundo natural a través del método científico, conectando descubrimientos con otras disciplinas del conocimiento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Arte</h3>
+                    <p>Expresión creativa que nos permite comprender y comunicar ideas complejas a través de múltiples lenguajes visuales y sensoriales.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤔</div>
+                    <h3>Filosofía</h3>
+                    <p>Reflexión profunda sobre las preguntas fundamentales de la existencia, el conocimiento y la ética humana.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Historia</h3>
+                    <p>Comprensión del pasado para entender el presente y construir un futuro más informado y consciente.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">✍️</div>
+                    <h3>Literatura</h3>
+                    <p>El poder de la palabra escrita para transmitir conocimiento, emociones y perspectivas humanas universales.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Pensamiento Crítico</h3>
+                    <p>Desarrollo de habilidades analíticas para evaluar información, formar criterios propios y tomar decisiones fundamentadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <section id="sobre-nosotros" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <div class="mission-text">
+                <p>Submundo del Conocimiento nace de la convicción de que el aprendizaje más profundo surge cuando las disciplinas dialogan entre sí. Somos una comunidad en construcción que busca derribar las barreras artificiales entre ciencia, arte, filosofía, historia y literatura.</p>
+                
+                <p>Nuestro enfoque multidisciplinario no es casualidad: creemos que los grandes desafíos de nuestro tiempo requieren perspectivas diversas y complementarias. Un científico puede encontrar inspiración en un poema, un filósofo puede iluminar un descubrimiento científico, y un artista puede visualizar conceptos históricos complejos.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Nuestra Misión</h3>
+                    <p>Fomentar el pensamiento crítico y el aprendizaje colectivo a través de la integración de múltiples disciplinas del conocimiento, creando espacios de diálogo y colaboración digital.</p>
+                </div>
+                <div class="card">
+                    <h3>Nuestra Visión</h3>
+                    <p>Convertirnos en una asociación civil reconocida que ofrezca valor curricular a sus miembros, promoviendo la producción cultural y el acceso libre al conocimiento.</p>
+                </div>
+                <div class="card">
+                    <h3>Nuestros Valores</h3>
+                    <p>Pensamiento crítico, colaboración, acceso libre al conocimiento, diversidad disciplinaria, y compromiso con la formación integral de jóvenes universitarios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Comunidad -->
+    <section id="comunidad" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Únete a Nuestra Comunidad</h2>
+            <div class="mission-text">
+                <p>Submundo del Conocimiento está dirigido especialmente a jóvenes universitarios que buscan expandir sus horizontes académicos y conectar con mentes curiosas de diversas disciplinas.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Para Estudiantes Universitarios</h3>
+                    <p>Espacio de crecimiento académico y personal donde podrás participar en proyectos multidisciplinarios que enriquecerán tu formación profesional.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Colaboración Digital</h3>
+                    <p>Plataformas digitales que facilitan la colaboración en proyectos, el intercambio de ideas y la construcción colectiva de conocimiento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📜</div>
+                    <h3>Valor Curricular</h3>
+                    <p>Trabajamos hacia el reconocimiento oficial como asociación civil, lo que permitirá otorgar valor curricular a la participación de nuestros miembros.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>Discord Activo</h3>
+                    <p>Únete a nuestro servidor de Discord donde la comunidad se reúne para discutir, colaborar y compartir conocimiento de forma dinámica y accesible.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="cta-button">Solicitar Invitación a Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="proyectos" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Proyectos</h2>
+            <div class="mission-text">
+                <p>Desarrollamos iniciativas que materializan nuestra visión multidisciplinaria, desde publicaciones colaborativas hasta eventos académicos y proyectos de investigación interdisciplinaria.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Proyectos en Desarrollo</h3>
+                    <p>Estamos diseñando nuestras primeras iniciativas, incluyendo series de artículos multidisciplinarios, talleres virtuales y colaboraciones académicas con universidades.</p>
+                </div>
+                <div class="card">
+                    <h3>Publicaciones Colaborativas</h3>
+                    <p>Artículos y ensayos escritos de forma colaborativa que exploran temas complejos desde múltiples perspectivas disciplinarias.</p>
+                </div>
+                <div class="card">
+                    <h3>Eventos Académicos</h3>
+                    <p>Conferencias, seminarios y debates que reúnen a expertos de diferentes campos para abordar los grandes temas de nuestro tiempo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Blog -->
+    <section id="blog" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Blog y Artículos</h2>
+            <div class="mission-text">
+                <p>Nuestro espacio de divulgación donde exploramos las intersecciones entre disciplinas, compartimos reflexiones profundas y promovemos el diálogo académico.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Próximamente</h3>
+                    <p>Estamos preparando nuestros primeros artículos de divulgación que abordarán temas como la relación entre arte y neurociencia, filosofía de la ciencia, y literatura como herramienta de comprensión histórica.</p>
+                </div>
+                <div class="card">
+                    <h3>Contribuciones Abiertas</h3>
+                    <p>Invitamos a nuestra comunidad a proponer temas, escribir artículos colaborativos y participar en la revisión por pares de contenido académico.</p>
+                </div>
+                <div class="card">
+                    <h3>Acceso Libre</h3>
+                    <p>Todo nuestro contenido será de acceso libre, siguiendo nuestra filosofía de democratización del conocimiento y la cultura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="mission-text">
+                <p>¿Tienes preguntas, ideas o te gustaría colaborar con nosotros? Estamos aquí para escucharte y construir juntos esta comunidad del conocimiento.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📧</div>
+                    <h3>Correo Electrónico</h3>
+                    <p>Para consultas generales, propuestas de colaboración o información sobre membresía.</p>
+                    <p><strong>[Tu correo aquí]</strong></p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>Discord</h3>
+                    <p>Únete a nuestra comunidad activa donde ocurren las conversaciones más dinámicas y los proyectos colaborativos.</p>
+                    <p><strong>[Enlace a Discord]</strong></p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Redes Sociales</h3>
+                    <p>Síguenos en nuestras redes sociales para estar al día con nuestras actividades y contenido.</p>
+                    <p><strong>[Enlaces a redes sociales]</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Submundo del Conocimiento. Una comunidad en construcción dedicada al aprendizaje multidisciplinario.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar navegación activa
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.style.backgroundColor = '';
+            });
+
+            // Desplazar hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Efecto de scroll suave para los enlaces
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
