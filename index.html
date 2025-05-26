@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submundo del Conocimiento - Comunidad Académica</title>
+    <style>
+        /* Variables CSS para mantener consistencia */
+        :root {
+            --color-primario: #2c3e50;
+            --color-secundario: #8b7355;
+            --color-acento: #d4af37;
+            --color-texto: #333333;
+            --color-fondo: #f8f6f3;
+            --color-fondo-claro: #ffffff;
+            --fuente-principal: 'Crimson Text', Georgia, serif;
+            --fuente-titulos: 'Playfair Display', Georgia, serif;
+            --fuente-nav: 'Lato', Arial, sans-serif;
+            --sombra-suave: 0 2px 4px rgba(0,0,0,0.1);
+            --transicion: all 0.3s ease;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fuente-principal);
+            line-height: 1.6;
+            color: var(--color-texto);
+            background-color: var(--color-fondo);
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: var(--color-primario);
+            box-shadow: var(--sombra-suave);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: var(--fuente-titulos);
+            font-size: 1.8rem;
+            color: var(--color-fondo-claro);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            font-family: var(--fuente-nav);
+            color: var(--color-fondo-claro);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-acento);
+            border-bottom-color: var(--color-acento);
+        }
+
+        /* Menú móvil */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-fondo-claro);
+            margin: 3px 0;
+            transition: var(--transicion);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232c3e50" width="1200" height="600"/><path fill="%23354a5f" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>');
+            color: var(--color-fondo-claro);
+            padding: 6rem 0;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-family: var(--fuente-titulos);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-principal {
+            display: inline-block;
+            background-color: var(--color-acento);
+            color: var(--color-primario);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: var(--fuente-nav);
+            font-weight: 600;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .btn-principal:hover {
+            background-color: #b8941f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Secciones principales */
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--color-fondo-claro);
+        }
+
+        h2 {
+            font-family: var(--fuente-titulos);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--color-primario);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-acento);
+        }
+
+        h3 {
+            font-family: var(--fuente-titulos);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-secundario);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Grid para características */
+        .caracteristicas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .caracteristica {
+            background-color: var(--color-fondo-claro);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicion);
+            border: 1px solid rgba(139, 115, 85, 0.1);
+        }
+
+        .caracteristica:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .caracteristica-icono {
+            font-size: 2.5rem;
+            color: var(--color-acento);
+            margin-bottom: 1rem;
+        }
+
+        /* Formulario de contacto */
+        .formulario-contacto {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .campo-formulario {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-family: var(--fuente-nav);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primario);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--fuente-principal);
+            font-size: 1rem;
+            transition: var(--transicion);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-acento);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-primario);
+            color: var(--color-fondo-claro);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-family: var(--fuente-titulos);
+            margin-bottom: 1rem;
+            color: var(--color-acento);
+        }
+
+        .footer-section a {
+            color: var(--color-fondo-claro);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transicion);
+        }
+
+        .footer-section a:hover {
+            color: var(--color-acento);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-primario);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--sombra-suave);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                text-align: left;
+            }
+        }
+
+        /* Animaciones */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sección oculta por defecto */
+        .seccion-contenido {
+            display: none;
+        }
+
+        .seccion-contenido.activa {
+            display: block;
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header>
+        <nav class="container">
+            <a href="#inicio" class="logo">Submundo del Conocimiento</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="#comunidad" class="nav-link">Comunidad</a></li>
+                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container fade-in">
+            <h1>Submundo del Conocimiento</h1>
+            <p>Una comunidad académica multidisciplinaria donde convergen ciencia, arte, filosofía, historia y literatura</p>
+            <a href="https://discord.gg/MA4ykVSm" class="btn-principal">Únete a Discord</a>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="sobre-nosotros">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <div class="fade-in">
+                <p>El Submundo del Conocimiento es una iniciativa académica con vocación de divulgación, diseñada para estudiantes universitarios y entusiastas del conocimiento. Nacemos con la convicción de que el aprendizaje trasciende las barreras disciplinarias y que el diálogo entre diferentes campos del saber enriquece nuestra comprensión del mundo.</p>
+                
+                <p>Nuestra misión es crear un espacio de encuentro intelectual donde el pensamiento crítico, la producción cultural y el aprendizaje colectivo se desarrollen de manera orgánica. Creemos firmemente en el acceso libre al conocimiento y en la construcción colaborativa del saber.</p>
+
+                <div class="caracteristicas-grid">
+                    <div class="caracteristica">
+                        <div class="caracteristica-icono">📚</div>
+                        <h3>Multidisciplinario</h3>
+                        <p>Integramos diversas áreas del conocimiento para fomentar una visión holística del aprendizaje.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <div class="caracteristica-icono">🤝</div>
+                        <h3>Colaborativo</h3>
+                        <p>Promovemos el trabajo conjunto y el intercambio de ideas entre todos los miembros.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <div class="caracteristica-icono">🎯</div>
+                        <h3>Orientado al Futuro</h3>
+                        <p>Planeamos constituirnos como asociación civil para ofrecer beneficios curriculares formales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comunidad -->
+    <section id="comunidad">
+        <div class="container">
+            <h2>Nuestra Comunidad</h2>
+            <div class="fade-in">
+                <p>La comunidad del Submundo del Conocimiento está conformada por estudiantes, académicos y profesionales comprometidos con el aprendizaje continuo y la divulgación del conocimiento. Nuestro espacio principal de interacción es nuestro servidor de Discord, donde organizamos debates, conferencias virtuales y grupos de estudio.</p>
+                
+                <h3>¿Cómo participar?</h3>
+                <p>Unirse es sencillo: únicamente necesitas interés genuino por el conocimiento y disposición para participar de manera respetuosa y constructiva. Accede a nuestro servidor de Discord donde encontrarás canales especializados por disciplina, espacios de debate general y áreas de trabajo colaborativo.</p>
+
+                <h3>Principios de la Comunidad</h3>
+                <ul style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                    <li>Respeto mutuo y diálogo constructivo</li>
+                    <li>Compromiso con la veracidad y el rigor académico</li>
+                    <li>Apertura a diferentes perspectivas y enfoques</li>
+                    <li>Colaboración activa en proyectos colectivos</li>
+                    <li>Promoción del pensamiento crítico</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos">
+        <div class="container">
+            <h2>Proyectos</h2>
+            <div class="fade-in">
+                <p>Nuestros proyectos buscan materializar el conocimiento en iniciativas concretas que beneficien tanto a nuestra comunidad como a la sociedad en general. Cada proyecto es una oportunidad para aplicar lo aprendido y generar impacto positivo.</p>
+
+                <div class="caracteristicas-grid">
+                    <div class="caracteristica">
+                        <h3>Ciclos de Conferencias</h3>
+                        <p>Series temáticas de charlas virtuales impartidas por miembros de la comunidad y expertos invitados sobre temas de actualidad académica.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <h3>Revista Digital</h3>
+                        <p>Publicación periódica con ensayos, reseñas y artículos de divulgación escritos por nuestra comunidad.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <h3>Grupos de Estudio</h3>
+                        <p>Espacios de aprendizaje colaborativo donde se abordan textos clásicos y contemporáneos de diversas disciplinas.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <h3>Biblioteca Digital</h3>
+                        <p>Proyecto futuro para crear un repositorio de recursos académicos de acceso libre para todos los miembros.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <h3>Mentoría Académica</h3>
+                        <p>Programa de apoyo entre pares para orientación en proyectos de investigación y desarrollo académico.</p>
+                    </div>
+                    <div class="caracteristica">
+                        <h3>Eventos Culturales</h3>
+                        <p>Organización de actividades que integren arte, ciencia y humanidades para enriquecer la experiencia formativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog">
+        <div class="container">
+            <h2>Blog y Artículos</h2>
+            <div class="fade-in">
+                <p>Este espacio está dedicado a la publicación de contenidos originales creados por nuestra comunidad. Aquí encontrarás ensayos, artículos de divulgación, reseñas y reflexiones sobre los temas que nos apasionan.</p>
+                
+                <div style="text-align: center; padding: 3rem; background-color: rgba(139, 115, 85, 0.1); border-radius: 8px; margin-top: 2rem;">
+                    <h3>Próximamente</h3>
+                    <p>Estamos trabajando en la implementación de nuestro sistema de publicación. Mientras tanto, puedes encontrar nuestros contenidos en el canal #publicaciones de nuestro servidor de Discord.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <div class="fade-in">
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">¿Tienes preguntas, sugerencias o deseas colaborar con nosotros? Nos encantaría escucharte. Utiliza el siguiente formulario o únete directamente a nuestro servidor de Discord.</p>
+                
+                <form class="formulario-contacto" id="formContacto">
+                    <div class="campo-formulario">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="asunto">Asunto</label>
+                        <input type="text" id="asunto" name="asunto" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-principal" style="width: 100%;">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#sobre-nosotros">Sobre Nosotros</a>
+                    <a href="#proyectos">Proyectos</a>
+                    <a href="#blog">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Comunidad</h4>
+                    <a href="https://discord.gg/tu-servidor">Discord</a>
+                    <a href="#comunidad">Cómo participar</a>
+                    <a href="#proyectos">Proyectos activos</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>submundo.conocimiento@email.com</p>
+                    <p>Discord: Submundo del Conocimiento</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Submundo del Conocimiento. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scrolling para enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Cerrar menú móvil si está abierto
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Animación fade-in al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.1s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Manejo del formulario de contacto
+        const formContacto = document.getElementById('formContacto');
+        
+        formContacto.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Aquí puedes agregar la lógica para enviar el formulario
+            // Por ahora, solo mostraremos un mensaje de confirmación
+            alert('Gracias por tu mensaje. Te responderemos pronto.');
+            formContacto.reset();
+        });
+
+        // Resaltar enlace activo en la navegación
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.style.color = '#d4af37';
+                } else {
+                    link.style.color = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
