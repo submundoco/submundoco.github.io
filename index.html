@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submundo del Conocimiento - Divulgación Multidisciplinaria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-light: #e94560;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navegación */
+        nav {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--text-light);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Secciones */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Inicio */
+        #inicio {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #inicio::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .mission {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--text-light);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            margin: 0.5rem;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid var(--text-light);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--text-light);
+        }
+
+        /* Sobre Nosotros */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-section {
+            background-color: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .team-member h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Comunidad */
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background-color: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .discord-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #5865F2;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .discord-button:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        /* Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border: 1px solid var(--gray-medium);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .status-planning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-construction {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-process {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: 5px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(15, 52, 96, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 26, 46, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-grid,
+            .community-features,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utilidades */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; color: var(--primary-color); }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-container">
+            <a href="#inicio" class="logo">Submundo del Conocimiento</a>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                <li><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="#comunidad" class="nav-link">Comunidad</a></li>
+                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Inicio -->
+    <section id="inicio" class="active">
+        <div class="container hero-content">
+            <h1>Submundo del Conocimiento</h1>
+            <p class="tagline">Un movimiento plural para mentes curiosas</p>
+            <p class="mission">
+                Somos una comunidad dedicada a la divulgación multidisciplinaria del conocimiento. 
+                Un espacio donde la ciencia, filosofía, historia, arte y literatura convergen 
+                para todos aquellos con sed de aprender y difundir.
+            </p>
+            <div>
+                <a href="#comunidad" class="cta-button nav-link">Únete a la Comunidad</a>
+                <a href="#sobre-nosotros" class="cta-button secondary nav-link">Conoce Más</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="sobre-nosotros">
+        <div class="container">
+            <h2 class="text-center mb-3">Sobre Nosotros</h2>
+            
+            <div class="about-grid">
+                <div class="about-section">
+                    <h3>Nuestra Historia</h3>
+                    <p>
+                        El Submundo del Conocimiento nació como un pequeño foro de filosofía en la aplicación Clover Space, 
+                        fundado por <strong>Sibi</strong>. Lo que comenzó como un espacio íntimo de reflexión filosófica, 
+                        evolucionó bajo la dirección de <strong>Lev</strong> hacia un servidor de Discord con una visión más amplia: 
+                        la divulgación multidisciplinaria del conocimiento.
+                    </p>
+                    <p>
+                        Hoy, nos encontramos en proceso de consolidación como asociación civil, buscando otorgar 
+                        valor curricular a quienes participan activamente en nuestras labores de divulgación, 
+                        producción de contenido y gestión comunitaria.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Visión y Objetivos</h3>
+                    <p>
+                        Aspiramos a ser un referente en la divulgación del conocimiento en el mundo hispanohablante, 
+                        creando puentes entre la academia y la sociedad. Nuestros objetivos incluyen:
+                    </p>
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>Democratizar el acceso al conocimiento de calidad</li>
+                        <li>Fomentar el pensamiento crítico y el diálogo interdisciplinario</li>
+                        <li>Crear oportunidades de desarrollo para estudiantes y entusiastas</li>
+                        <li>Producir contenido divulgativo de alto nivel</li>
+                        <li>Construir una comunidad activa y comprometida con el aprendizaje</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h3>Enfoque Multidisciplinario</h3>
+                    <p>
+                        Creemos que el conocimiento no debe estar fragmentado en compartimentos estancos. 
+                        Por ello, abarcamos diversas áreas del saber humano:
+                    </p>
+                    <p>
+                        <strong>Ciencia:</strong> Desde la física cuántica hasta la biología molecular<br>
+                        <strong>Filosofía:</strong> Explorando las grandes preguntas de la existencia<br>
+                        <strong>Historia:</strong> Comprendiendo nuestro pasado para construir el futuro<br>
+                        <strong>Arte:</strong> Apreciando la expresión creativa humana<br>
+                        <strong>Literatura:</strong> Navegando por los mundos de la palabra escrita
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Principios y Valores</h3>
+                    <p>
+                        <strong>Pluralidad:</strong> Acogemos todas las perspectivas respetuosas<br>
+                        <strong>Rigor:</strong> Comprometidos con la veracidad y calidad del contenido<br>
+                        <strong>Accesibilidad:</strong> El conocimiento debe ser para todos<br>
+                        <strong>Colaboración:</strong> Construimos juntos este espacio de aprendizaje<br>
+                        <strong>Curiosidad:</strong> La pregunta es tan valiosa como la respuesta
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <h3 class="text-center mb-2">Nuestro Equipo</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <h4>Sibi</h4>
+                        <p>Fundador</p>
+                    </div>
+                    <div class="team-member">
+                        <h4>Lev</h4>
+                        <p>Director y Desarrollador</p>
+                    </div>
+                    <div class="team-member">
+                        <h4>Tu nombre aquí</h4>
+                        <p>¡Únete al equipo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comunidad -->
+    <section id="comunidad">
+        <div class="container">
+            <h2 class="text-center mb-3">Nuestra Comunidad</h2>
+            
+            <p class="text-center mb-3" style="max-width: 800px; margin: 0 auto;">
+                El corazón del Submundo del Conocimiento late en nuestro servidor de Discord, 
+                donde estudiantes de todos los niveles y entusiastas del conocimiento se reúnen 
+                para aprender, debatir y crear juntos.
+            </p>
+
+            <div class="community-features">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Canales Temáticos</h3>
+                    <p>Espacios dedicados para cada disciplina, desde debates filosóficos hasta 
+                    discusiones sobre los últimos avances científicos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Valor Curricular</h3>
+                    <p>Participa activamente y obtén reconocimiento por tus contribuciones a la 
+                    divulgación del conocimiento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Networking Académico</h3>
+                    <p>Conecta con estudiantes, profesionales y apasionados del conocimiento 
+                    de diversas disciplinas y niveles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Proyectos Colaborativos</h3>
+                    <p>Participa en la creación de contenido, organización de eventos y 
+                    desarrollo de iniciativas de divulgación.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Eventos Regulares</h3>
+                    <p>Charlas, debates, clubes de lectura y actividades que enriquecen 
+                    nuestra experiencia de aprendizaje colectivo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Mentoría</h3>
+                    <p>Aprende de miembros más experimentados y comparte tu conocimiento 
+                    con quienes inician su camino.</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="discord-button">
+                    🎮 Únete a nuestro Discord
+                </a>
+                <p class="mt-2" style="color: var(--text-secondary);">
+                    ¡Más de [X] miembros activos te esperan!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos">
+        <div class="container">
+            <h2 class="text-center mb-3">Nuestros Proyectos</h2>
+            
+            <p class="text-center mb-3" style="max-width: 800px; margin: 0 auto;">
+                Trabajamos constantemente en iniciativas que amplíen nuestro alcance y 
+                profundicen nuestro impacto en la divulgación del conocimiento.
+            </p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>📖 Revista Digital</h3>
+                    <p>
+                        Una publicación periódica que reunirá artículos de divulgación, 
+                        ensayos y reseñas escritos por nuestra comunidad, cubriendo todas 
+                        las áreas del conocimiento que cultivamos.
+                    </p>
+                    <span class="project-status status-planning">En planeación</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>✍️ Blog Colaborativo</h3>
+                    <p>
+                        Espacio digital donde los miembros de la comunidad podrán publicar 
+                        sus reflexiones, análisis y descubrimientos, fomentando la escritura 
+                        y el pensamiento crítico.
+                    </p>
+                    <span class="project-status status-construction">En construcción</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>💬 Foro de Discusión</h3>
+                    <p>
+                        Retornando a nuestras raíces, desarrollamos un foro moderno donde 
+                        las conversaciones puedan desarrollarse con mayor profundidad y 
+                        permanencia que en Discord.
+                    </p>
+                    <span class="project-status status-active">Activo</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>🏛️ Asociación Civil</h3>
+                    <p>
+                        Estamos en proceso de formalización legal como asociación civil, 
+                        lo que nos permitirá ofrecer certificaciones oficiales y expandir 
+                        nuestro impacto social.
+                    </p>
+                    <span class="project-status status-process">En proceso legal</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>🎥 Canal de Contenido</h3>
+                    <p>
+                        Producción de videos educativos, podcasts y transmisiones en vivo 
+                        para llevar el conocimiento a plataformas multimedia y alcanzar 
+                        nuevas audiencias.
+                    </p>
+                    <span class="project-status status-planning">En planeación</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>📚 Biblioteca Digital</h3>
+                    <p>
+                        Curación de recursos educativos de acceso libre, organizados por 
+                        disciplina y nivel, para facilitar el autoaprendizaje de nuestra 
+                        comunidad.
+                    </p>
+                    <span class="project-status status-construction">En construcción</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <h2 class="text-center mb-3">Contacto</h2>
+            
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h3>¿Quieres colaborar o apoyar el proyecto?</h3>
+                <p>
+                    Estamos siempre abiertos a nuevas colaboraciones, ideas y formas de apoyo. 
+                    Si compartes nuestra visión de democratizar el conocimiento, ¡contáctanos!
+                </p>
+                
+                <div class="social-links">
+                    <a href="#" title="Discord">💬</a>
+                    <a href="#" title="YouTube">📺</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Email">✉️</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Submundo del Conocimiento. Todos los derechos reservados.</p>
+        <p>Un movimiento plural para todo aquel con sed de aprender y difundir.</p>
+    </footer>
+
+    <script>
+        // Navegación entre secciones
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        // Función para mostrar sección
+        function showSection(targetId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Actualizar enlaces activos
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === targetId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar menú móvil
+            navMenu.classList.remove('active');
+
+            // Scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Event listeners para navegación
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                showSection(targetId);
+            });
+        });
+
+        // Toggle menú móvil
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú móvil al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Animación del navbar al hacer scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const navbar = document.querySelector('nav');
+            
+            if (currentScroll > 100) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Manejo del formulario de contacto
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Aquí iría la lógica para enviar el formulario
+            // Por ahora, mostramos un mensaje de confirmación
+            const formData = new FormData(contactForm);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.\n\nDatos recibidos:\n' + 
+                  `Nombre: ${data.name}\n` +
+                  `Email: ${data.email}\n` +
+                  `Asunto: ${data.subject}\n` +
+                  `Mensaje: ${data.message}`);
+            
+            // Limpiar formulario
+            contactForm.reset();
+        });
+
+        // Animación suave para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#' && !this.classList.contains('nav-link')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Efecto de aparición gradual para elementos al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.querySelectorAll('.about-section, .feature-card, .project-card, .team-member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Contador animado para estadísticas (placeholder)
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const counter = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(counter);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Efectos de hover mejorados para botones
+        document.querySelectorAll('.cta-button, .discord-button, .submit-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Validación mejorada del formulario
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#0f3460';
+            });
+        });
+    </script>
+</body>
+</html>
